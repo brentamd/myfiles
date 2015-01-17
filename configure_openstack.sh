@@ -106,12 +106,12 @@ glance image-create --name="cirros-0.3.3-x86_64" --disk-format=qcow2 \
   --container-format=bare --is-public=true \
   --copy-from http://cdn.download.cirros-cloud.net/0.3.3/cirros-0.3.3-x86_64-disk.img
 
-glance image-create --name="Trust x86_64" --disk-format=qcow2 \
+glance image-create --name="Trusty x86_64" --disk-format=qcow2 \
   --container-format=ovf --is-public=true \
   --copy-from http://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img 
 
 glance image-create --name="Centos 64" --disk-format=qcow2 \
   --container-format=bare --is-public=true \
-  --copy-from http://mirror.catn.com/pub/catn/images/qcow2/centos6.4-x86_64-gold-master.img
+  --copy-from http://cloud.centos.org/centos/6/images/CentOS-6-x86_64-GenericCloud-20141129_01.qcow2
 
 exit
