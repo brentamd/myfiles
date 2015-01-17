@@ -1,25 +1,4 @@
-##
-##
-##
-## THIS JUJU Charm Deploy file will build a small OpenStack Cloud on a Seamicro Chassis
-## It will install:
-##      Openstack Icehouse with:
-##       All Core Services
-##       Basic CEPH Storage on 3 nodes
-##       Neutron Networking using GRE Tunneling
-##       Three Compute Nodes
-##
-## Once installed, additional compute nodes can be added by doing
-##              juju add-unit nova-compute
-##
-##
-## Original Version by Canonical for Orange Box Project
-##
-## Author: Brent Clements <brent.clements@amd.com>
-## Version: 1.10
-##
-##
-icehouse:
+SeaMicro_OpenStack-icehouse:
   overrides:
     openstack-origin: "cloud:trusty-icehouse"
     source: "distro"
@@ -45,7 +24,7 @@ icehouse:
         "gui-x": "2013.905517578125"
         "gui-y": "75.58013916015625"
     "nova-compute":
-      charm: "cs:trusty/nova-compute-3"
+      charm: "cs:trusty/nova-compute-11"
       num_units: 3
       to: [ceph=0, ceph=1, ceph=2]
       options:
@@ -54,7 +33,7 @@ icehouse:
         "gui-x": "776.1040649414062"
         "gui-y": "-81.22811031341553"
     "neutron-gateway":
-      charm: "cs:trusty/quantum-gateway-3"
+      charm: "cs:trusty/quantum-gateway-22"
       num_units: 1
       options:
         ext-port: eth7
@@ -63,7 +42,7 @@ icehouse:
         "gui-x": "329.0572509765625"
         "gui-y": "46.4658203125"
     "nova-cloud-controller": 
-      charm: "cs:trusty/nova-cloud-controller-41"
+      charm: "cs:trusty/nova-cloud-controller-50"
       num_units: 1
       options: 
         "network-manager": Neutron
@@ -71,7 +50,7 @@ icehouse:
         "gui-x": "1388.40185546875"
         "gui-y": "-118.01156234741211"
     rabbitmq: 
-      charm: "cs:trusty/rabbitmq-server-4"
+      charm: "cs:trusty/rabbitmq-server-23"
       num_units: 1
       to: mysql
       annotations:
@@ -117,7 +96,7 @@ icehouse:
         "gui-x": "2353.6898193359375"
         "gui-y": "-94.2642593383789"
     mysql: 
-      charm: "cs:trusty/mysql-1"
+      charm: "cs:trusty/mysql-12"
       num_units: 1
       options:
         "dataset-size": "20%"
