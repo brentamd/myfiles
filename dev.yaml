@@ -11,6 +11,7 @@ icehouse:
         "monitor-secret": AQAAvoJSOAv/NRAAgvXP8d7iXN7lWYbvDZzm2Q==
         "osd-devices": "/srv"
         "osd-reformat": "yes"
+        "prefer-ipv6": "False"
       annotations:
         "gui-x": "2648.6688842773438"
         "gui-y": "708.3873901367188"
@@ -27,7 +28,11 @@ icehouse:
       charm: "cs:trusty/nova-compute-11"
       num_units: 3
       options:
-        "flat-interface": eth0
+        "flat-interface": "eth0"
+        "config-flags": "auto_assign_floating_ip=True"
+        "enable-live-migration": "True"
+        "migration-auth-type": "ssh"
+        "prefer-ipv6": "False"
       annotations:
         "gui-x": "776.1040649414062"
         "gui-y": "-81.22811031341553"
@@ -43,8 +48,11 @@ icehouse:
     "nova-cloud-controller": 
       charm: "cs:trusty/nova-cloud-controller-50"
       num_units: 1
-      options: 
-        "network-manager": Neutron
+      options:
+        "prefer-ipv6": "False"
+        "network-manager": "Neutron"
+        "config-flags": "auto_assign_floating_ip=True"
+        "console-access-protocol": "novnc"
       annotations:
         "gui-x": "1388.40185546875"
         "gui-y": "-118.01156234741211"
