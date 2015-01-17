@@ -1,25 +1,4 @@
-##
-##
-##
-## THIS JUJU Charm Deploy file will build a small OpenStack Cloud on a Seamicro Chassis
-## It will install:
-##      Openstack Icehouse with:
-##       All Core Services
-##       Basic CEPH Storage on 3 nodes
-##       Neutron Networking using GRE Tunneling
-##       Three Compute Nodes
-##
-## Once installed, additional compute nodes can be added by doing
-##              juju add-unit nova-compute
-##
-##
-## Original Version by Canonical for Orange Box Project
-##
-## Author: Brent Clements <brent.clements@amd.com>
-## Version: 1.10
-##
-##
-icehouse:
+SeaMicro-OpenStack-icehouse:
   overrides:
     openstack-origin: "cloud:trusty-icehouse"
     source: "distro"
@@ -36,7 +15,7 @@ icehouse:
         "gui-x": "2648.6688842773438"
         "gui-y": "708.3873901367188"
     keystone: 
-      charm: "cs:trusty/keystone-5"
+      charm: "cs:trusty/keystone-9"
       num_units: 1
       options: 
         "admin-password": "seamicro"
@@ -45,16 +24,15 @@ icehouse:
         "gui-x": "2013.905517578125"
         "gui-y": "75.58013916015625"
     "nova-compute":
-      charm: "cs:trusty/nova-compute-3"
+      charm: "cs:trusty/nova-compute-11"
       num_units: 3
-      to: [ceph=0, ceph=1, ceph=2]
       options:
         "flat-interface": eth0
       annotations:
         "gui-x": "776.1040649414062"
         "gui-y": "-81.22811031341553"
     "neutron-gateway":
-      charm: "cs:trusty/quantum-gateway-3"
+      charm: "cs:trusty/quantum-gateway-8"
       num_units: 1
       options:
         ext-port: eth7
@@ -63,7 +41,7 @@ icehouse:
         "gui-x": "329.0572509765625"
         "gui-y": "46.4658203125"
     "nova-cloud-controller": 
-      charm: "cs:trusty/nova-cloud-controller-41"
+      charm: "cs:trusty/nova-cloud-controller-50"
       num_units: 1
       options: 
         "network-manager": Neutron
@@ -71,21 +49,21 @@ icehouse:
         "gui-x": "1388.40185546875"
         "gui-y": "-118.01156234741211"
     rabbitmq: 
-      charm: "cs:trusty/rabbitmq-server-4"
+      charm: "cs:trusty/rabbitmq-server-23"
       num_units: 1
       to: mysql
       annotations:
         "gui-x": "633.8120727539062"
         "gui-y": "862.6530151367188"
     glance: 
-      charm: "cs:trusty/glance-3"
+      charm: "cs:trusty/glance-9"
       num_units: 1
       to: nova-cloud-controller
       annotations:
         "gui-x": "1147.3269653320312"
         "gui-y": "1389.5643157958984"
     cinder: 
-      charm: "cs:trusty/cinder-4"
+      charm: "cs:trusty/cinder-10"
       num_units: 1
       to: nova-cloud-controller
       options: 
@@ -94,64 +72,60 @@ icehouse:
         "gui-x": "1752.32568359375"
         "gui-y": "1365.716194152832"
     "ceph-radosgw":
-      charm: "cs:trusty/ceph-radosgw-3"
+      charm: "cs:trusty/ceph-radosgw-14"
       num_units: 1
       to: nova-cloud-controller
       annotations:
         "gui-x": "2216.68212890625"
         "gui-y": "697.16796875"
     cinder-ceph:
-      charm: "cs:trusty/cinder-ceph-1"
+      charm: "cs:trusty/cinder-ceph-4"
       num_units: 0
       annotations:
         "gui-x": "2257.5515747070312"
         "gui-y": "1231.2130126953125"
     "openstack-dashboard": 
-      charm: "cs:trusty/openstack-dashboard-4"
+      charm: "cs:trusty/openstack-dashboard-6"
       num_units: 1
-      to: "keystone"
       options:
         webroot: "/"
-        ubuntu-theme: "no"
       annotations:
         "gui-x": "2353.6898193359375"
         "gui-y": "-94.2642593383789"
     mysql: 
-      charm: "cs:trusty/mysql-1"
+      charm: "cs:trusty/mysql-13"
       num_units: 1
-      options:
-        "dataset-size": "20%"
       annotations:
         "gui-x": "364.4567565917969"
         "gui-y": "1067.5167846679688"
     mongodb:
-      branch: "lp:charms/mongodb"
+      charm: "cs:trusty/mongodb-15"
       num_units: 1
       annotations:
         "gui-x": "-70.0399979352951"
         "gui-y": "1282.8224487304688"
     ceilometer:
-      charm: "cs:trusty/ceilometer-0"
+      charm: "cs:trusty/ceilometer-2"
       num_units: 1
       to: mongodb
       annotations:
         "gui-x": "-78.13333225250244"
         "gui-y": "919.3128051757812"
     ceilometer-agent:
-      charm: "cs:trusty/ceilometer-agent-0"
+      charm: "cs:trusty/ceilometer-agent-2"
       num_units: 0
       annotations:
         "gui-x": "-90.9158582687378"
         "gui-y": "562.5347595214844"
     heat:
-      charm: "cs:trusty/heat-0"
+      charm: "cs:trusty/heat-4"
       num_units: 1
       to: mongodb
       annotations:
         "gui-x": "494.94012451171875"
         "gui-y": "1363.6024169921875"
     ntp:
-      charm: "cs:trusty/ntp-4"
+      charm: "cs:trusty/ntp-6"
       num_units: 0
       annotations:
         "gui-x": "-104.57728099822998"
